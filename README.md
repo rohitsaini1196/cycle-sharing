@@ -34,4 +34,10 @@ npm start
 
 ###### And go to http://localhost:3000
 
+#### ScreenShots :
 
+![HomePage Screenshot](https://github.com/rohitsaini1196/cycle-sharing/blob/master/screenshots/s1.png)
+
+![User Registration and login Screenshot](https://github.com/rohitsaini1196/cycle-sharing/blob/master/screenshots/s2.png)
+
+![Profile and Dashboard Screenshot](https://github.com/rohitsaini1196/cycle-sharing/blob/master/screenshots/s3.png)
