@@ -1,0 +1,33 @@
+{
+  "name": "cycool",
+  "version": "1.0.0",
+  "description": "Cycle Sharing App by Rohit Saini",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "Cycle",
+    "Sharing",
+    "Cycool",
+    "Rohit Saini",
+    "Web Application"
+  ],
+  "author": "Rohit Saini",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cloudinary": "^1.18.1",
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.6",
+    "express-flash": "0.0.2",
+    "express-session": "^1.17.0",
+    "method-override": "^3.0.0",
+    "multer": "^1.4.2",
+    "mysql": "^2.17.1",
+    "passport": "^0.4.1",
+    "password-hash": "^1.2.2",
+    "request": "^2.88.0"
+  }
+}

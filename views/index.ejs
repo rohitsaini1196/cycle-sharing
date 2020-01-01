@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Cycool | Cool cycle sharing app for IISERB</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link href="./style.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script>
+      var cycles  = <%-JSON.stringify(data)%>;
+      console.log(cycles);
+
+
+       function timeOfGivenDate(str) {
+          var localDate = new Date(str);
+          var h = localDate.getHours(), m = localDate.getMinutes();
+          if (h < 10) { h = "0" + h;  }if (m < 10) {  m = "0" + m;  }
+          return h + ":" + m;
+        }
+        function dateOfGivenDate(str) {
+            var localDate = new Date(str);
+            var day = localDate.getDate(), month = localDate.getMonth() + 1, year = localDate.getFullYear();
+            return day + "-" + month + "-" + year;
+          }
+    </script>
+
+    <script>
+      $(document).ready(function() {
+        $.each(cycles, function(i, val) {
+          $("#all-cycle-area").append(
+            ` <div class='col-xs-12 col-md-3 coolboy'> <article class='card animated fadeInLeft'>  <img class='card-img-top img-responsive' src='${cycles[i].cycle_image_link}' alt='${cycles[i].cycle_name}' height="200px" style="width: auto;" />   <div class='card-body'> ` +
+              ` <h4 class='card-title' id='cycle-title'>  ${cycles[i].cycle_name} ` +
+              `<span style='font-size: small;'>of <a href='#' class='badge badge-secondary'>${cycles[i].from_user_name}</a></span> </h4><p class='card-text'>  <strong>Pickup point  <i class='fa fa-map-marker' aria-hidden='true' style='color:red;'></i> : </strong> ${cycles[i].pickup_address} <br /> ` +
+              `<strong>From <i class='fa fa-calendar text-primary' aria-hidden='true'></i> :  </strong> ${timeOfGivenDate(
+                cycles[i].from_time
+              )}<span class='badge badge-pill badge-light'>${dateOfGivenDate(
+                cycles[i].from_time
+              )}</span> <br />  <strong>To  <i class='fa fa-calendar-times-o .text-muted' aria-hidden='true'></i>   :  </strong> ${timeOfGivenDate(
+                cycles[i].to_time
+              )} <span class='badge badge-pill badge-light'>${dateOfGivenDate(
+                cycles[i].to_time
+              )}` +
+              "</span>   <br />  </p>  " +
+              " <button type='button' class='btn btn-primary text-center'> Book Now  </button> </div> </article></div>"
+          );
+        });
+      });
+    </script>
+    <style>
+      a {
+        transition: 0.25s all;
+      }
+      .card {
+        overflow: hidden;
+      }
+      .card-inverse .card-img-overlay {
+        background-color: rgba(#333, 0.85);
+        border-color: rgba(#333, 0.85);
+      }
+      .coolboy {
+        margin-bottom: 40px;
+      }
+      #add-cycle-form {
+        display: none;
+      }
+      #login-form {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Cycool</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/"
+              >Home <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About Us</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav  navbar-right">
+          <li class="nav-item">
+            <a class="nav-link" href="/login" tabindex="-1" aria-disabled="true"
+              ><i
+                class="fa fa-plus-circle text-primary fa-2x"
+                aria-hidden="true"
+              ></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login" tabindex="-1" aria-disabled="true"
+              >Login</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="/register"
+              tabindex="-1"
+              aria-disabled="true"
+              >Register</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <article class="container">
+      <article class="row" id="all-cycle-area">
+        <div class="col-xs-12 col-md-3 coolboy">
+          <article class="card animated fadeInLeft">
+            <img
+              class="card-img-top img-responsive"
+              src="https://cyclenavy.com/wp-content/uploads/2018/08/doodle-green-768x547.png"
+              alt="Deer in nature"
+              height="200px"
+              style="width: auto;"
+            />
+            <div></div>
+            <div class="card-body">
+              <h4 class="card-title" id="cycle-title">
+                HyperX
+                <span style="font-size: small;"
+                  >of
+                  <a href="#" class="badge badge-secondary"
+                    >Rohit Saini</a
+                  ></span
+                >
+              </h4>
+              <p class="card-text">
+                <strong
+                  >Pickup point
+                  <i
+                    class="fa fa-map-marker"
+                    aria-hidden="true"
+                    style="color:red;"
+                  ></i>
+                  :
+                </strong>
+                H6, IISERB <br />
+                <strong
+                  >From
+                  <i class="fa fa-calendar text-primary" aria-hidden="true"></i>
+                  :
+                </strong>
+                05:00
+                <span class="badge badge-pill badge-light">2019-12-24</span>
+                <br />
+                <strong
+                  >To
+                  <i
+                    class="fa fa-calendar-times-o text-primary"
+                    aria-hidden="true"
+                  ></i>
+                  :
+                </strong>
+                23:00
+                <span class="badge badge-pill badge-light">2019-12-29</span>
+                <br />
+              </p>
+              <button type="button" class="btn btn-primary text-center">
+                Book Now
+              </button>
+            </div>
+          </article>
+        </div>
+        <!-- <div class="col-xs-12 col-md-3 coolboy">
+          <article class="card animated fadeInLeft">
+            <img
+              class="card-img-top img-responsive"
+              src="https://www.everestcycle.com/admin/img/category/kids%20cycle.jpg"
+              alt="Deer in nature"
+            />
+            <div class="card-body">
+              <h4 class="card-title" id="cycle-title">
+                HyperX
+                <span style="font-size: small;"
+                  >of
+                  <a href="#" class="badge badge-secondary"
+                    >Rohit Saini</a
+                  ></span
+                >
+              </h4>
+              <p class="card-text">
+                <strong
+                  >Pickup point
+                  <i
+                    class="fa fa-map-marker"
+                    aria-hidden="true"
+                    style="color:red;"
+                  ></i>
+                  :
+                </strong>
+                H6, IISERB <br />
+                <strong
+                  >From
+                  <i class="fa fa-calendar text-primary" aria-hidden="true"></i>
+                  :
+                </strong>
+                05:00
+                <span class="badge badge-pill badge-light">2019-12-24</span>
+                <br />
+                <strong
+                  >To
+                  <i
+                    class="fa fa-calendar-times-o .text-muted"
+                    aria-hidden="true"
+                  ></i>
+                  :
+                </strong>
+                23:00
+                <span class="badge badge-pill badge-light">2019-12-29</span>
+                <br />
+              </p>
+              <button type="button" class="btn btn-primary text-center">
+                Book Now
+              </button>
+            </div>
+          </article>
+        </div> -->
+      </article>
+
+      <br /><br /><br /><br />
+    </article>
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
