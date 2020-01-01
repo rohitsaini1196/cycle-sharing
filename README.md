@@ -38,7 +38,7 @@ npm start
 
 #### ScreenShots :
 
-![HomePage Screenshot](https://github.com/rohitsaini1196/cycle-sharing/blob/master/screenshots/s1.png)
+![HomePage Screenshot](https://github.com/rohitsaini1196/cycle-sharing/blob/master/screenshots/s4.png)
 
 
 ![User Registration and login Screenshot](https://github.com/rohitsaini1196/cycle-sharing/blob/master/screenshots/s2.png)
