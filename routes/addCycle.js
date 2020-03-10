@@ -3,9 +3,9 @@ const cloudinary = require("cloudinary").v2;
 const path = require("path");
 
 cloudinary.config({
-  cloud_name: "stillhungry",
-  api_key: "832367598679594",
-  api_secret: "inChy-DkiUMz3SzBBFAuEE33kQY"
+  cloud_name: "CLOUD_NAME",
+  api_key: "API_KEY",
+  api_secret: "API-SECRET"
 });
 
 exports.addCycle = function(req, res, next) {
