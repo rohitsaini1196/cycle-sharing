@@ -18,6 +18,9 @@
 
     <script>
       var cycles  = <%-JSON.stringify(data)%>;
+      var user = <%-JSON.stringify(user)%>;
+      console.log(user);
+
       console.log(cycles);
 
 
@@ -51,10 +54,48 @@
                 cycles[i].to_time
               )}` +
               "</span>   <br />  </p>  " +
-              " <button type='button' class='btn btn-primary text-center'> Book Now  </button> </div> </article></div>"
+              `<button type='button' class='btn btn-primary text-center' id='model-pop-${i}' onclick='buttonPopup(${i})'> Book Now  </button> </div> </article></div>`
           );
         });
+
+        // function buttonPopup(n) {
+        //   $.ajax({
+        //     url: "http://localhost:3000/book",
+        //     type: "POST",
+        //     data: JSON.stringify({
+        //       bookedCycleName: cycles[n].cycle_name,
+        //       bookedCycleImage: cycles[n].cycle_image_link,
+        //       from_user: cycles[n].from_user,
+        //       to_user: user[0].user_email
+        //     }), //send this to server
+        //     success: function(returned) {
+        //       console.log(returnet); // here can get the return of route
+        //     },
+        //     error: function() {}
+        //   });
+        // }
       });
+
+      function buttonPopup(n) {
+        var xhr = new XMLHttpRequest();
+        var url = "http://localhost:3000/book";
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            var json = JSON.parse(xhr.responseText);
+          }
+        };
+        var data = JSON.stringify({
+          bookedCycleName: cycles[n].cycle_name,
+          bookedCycleImage: cycles[n].cycle_image_link,
+          from_user: cycles[n].from_user,
+          to_user: user[0].user_email
+        });
+        xhr.send(data);
+        //alert("Your Cycle is booked!");
+        document.getElementById("pop-hidden-button").click();
+      }
     </script>
     <style>
       a {
@@ -101,12 +142,32 @@
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">About Us</a>
+            <a class="nav-link" href="/orders/cycles">Your Cycles</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/orders/live">Live Orders</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/orders/previous">Previous Orders</a>
           </li>
         </ul>
         <ul class="navbar-nav  navbar-right">
           <li class="nav-item">
-            <a class="nav-link" href="/login" tabindex="-1" aria-disabled="true"
+            <a
+              class="nav-link"
+              href=""
+              id="userdata"
+              tabindex="-1"
+              aria-disabled="true"
+              >Username</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="/addcycle"
+              tabindex="-1"
+              aria-disabled="true"
               ><i
                 class="fa fa-plus-circle text-primary fa-2x"
                 aria-hidden="true"
@@ -119,17 +180,53 @@
             >
           </li>
           <li class="nav-item">
-            <a
-              class="nav-link"
-              href="/register"
-              tabindex="-1"
-              aria-disabled="true"
-              >Register</a
-            >
+            <form method="POST" action="/logout">
+              <button
+                type="submit"
+                class="nav-link"
+                tabindex="-1"
+                aria-disabled="true"
+              >
+                Logout
+              </button>
+            </form>
           </li>
         </ul>
       </div>
     </nav>
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Order Placed</h4>
+            <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Check your live orders for more info.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default">
+              <a href="./orders/live">Live Booking</a>
+            </button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button
+      type="button"
+      class="btn btn-info btn-lg"
+      data-toggle="modal"
+      data-target="#myModal"
+      id="pop-hidden-button"
+      style="display: none;"
+    >
+      Open Small Modal
+    </button>
 
     <article class="container">
       <article class="row" id="all-cycle-area">
@@ -264,5 +361,10 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
+    <script>
+      var x = document.getElementById("userdata");
+      x.href = "/users/" + user[0].id;
+      x.innerHTML = user[0].name;
+    </script>
   </body>
 </html>

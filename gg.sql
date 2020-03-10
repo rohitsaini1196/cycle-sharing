@@ -1,5 +1,3 @@
-/*Copy these lines and paste if you want to manually add to Databases */
-
 CREATE TABLE users (
      id MEDIUMINT NOT NULL AUTO_INCREMENT,
      name CHAR(30) NOT NULL,

@@ -1,19 +1,13 @@
 {
   "name": "cycool",
   "version": "1.0.0",
-  "description": "Cycle Sharing App by Rohit Saini",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "Cycle",
-    "Sharing",
-    "Cycool",
-    "Rohit Saini",
-    "Web Application"
-  ],
-  "author": "Rohit Saini",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
