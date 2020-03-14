@@ -1,5 +1,7 @@
 var connection = require("../config/db").connection;
+
 var passwordHash = require("password-hash");
+
 exports.login = function(req, res) {
   var email = req.body.email;
   var passwordLogin = req.body.password;
@@ -25,14 +27,18 @@ exports.login = function(req, res) {
             } else {
               if (results.length > 0) {
                 if (passwordHash.verify(passwordLogin, results[0].password)) {
-                  res.render("profile.ejs", {
-                    data: data,
-                    name: results[0].name,
-                    email: results[0].user_email,
-                    address: results[0].address,
-                    contact: results[0].contact_no,
-                    id: results[0].id
-                  });
+                  const { userId } = req.session;
+
+                  req.session.userId = results[0].id;
+                  // res.render("profile.ejs", {
+                  //   data: data,
+                  //   name: results[0].name,
+                  //   email: results[0].user_email,
+                  //   address: results[0].address,
+                  //   contact: results[0].contact_no,
+                  //   id: results[0].id
+                  // });
+                  res.redirect("/");
                   // console.log(data);
                 } else {
                   res.send({

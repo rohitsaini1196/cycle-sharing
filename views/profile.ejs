@@ -93,6 +93,33 @@
       .coolboy {
         margin-bottom: 40px;
       }
+
+      .split-1 {
+        width: 70%;
+        position: relative;
+        z-index: 1;
+
+        overflow-x: hidden;
+        padding-top: 20px;
+      }
+      .split-2 {
+        width: 20%;
+        height: 80%;
+        position: absolute;
+        z-index: 1;
+        top: 70px;
+        overflow-x: hidden;
+        padding-top: 20px;
+      }
+      .left {
+        left: 0;
+        background-color: #111;
+      }
+
+      .right {
+        right: 0;
+        background-color: red;
+      }
     </style>
   </head>
 
@@ -268,6 +295,22 @@
         <input type="text" id="booking-data-input" name="alldata" />
       </form>
     </div> -->
+
+    <div class="split-2 right">
+      <h1>Bookings:</h1>
+      <p>Tomorrow : 4 booking hai</p>
+      <p>Tomorrow : 4 booking hai</p>
+      <p>Tomorrow : 4 booking hai</p>
+      <p>Tomorrow : 4 booking hai</p>
+      <p>Tomorrow : 4 booking hai</p>
+      <p>Tomorrow : 4 booking hai</p>
+
+      <p>Tomorrow : 4 booking hai</p>
+
+      <p>Tomorrow : 4 booking hai</p>
+
+      <p>Tomorrow : 4 booking hai</p>
+    </div>
 
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
