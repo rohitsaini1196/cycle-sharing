@@ -4,6 +4,8 @@ exports.register = function(req, res) {
   var today = new Date();
 
   var passwordOrg = req.body.password;
+  console.log(passwordOrg);
+
   var hashedPassword = passwordHash.generate(passwordOrg);
 
   var user = {
@@ -28,10 +30,11 @@ exports.register = function(req, res) {
           failed: "error ocurred"
         });
       } else {
-        res.send({
-          code: 200,
-          success: "user registered sucessfully"
-        });
+        // res.send({
+        //   code: 200,
+        //   success: "user registered sucessfully"
+        // });
+        res.redirect("/login");
       }
     });
   } else {

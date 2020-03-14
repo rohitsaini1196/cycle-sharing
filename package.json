@@ -1,21 +1,16 @@
 {
   "name": "cycool",
   "version": "1.0.0",
-  "description": "Cycle Sharing App by Rohit Saini",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "Cycle",
-    "Sharing",
-    "Cycool",
-    "Rohit Saini",
-    "Web Application"
-  ],
-  "author": "Rohit Saini",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "dependencies": {
+    "adorable-avatars": "^0.4.1",
     "body-parser": "^1.19.0",
     "cloudinary": "^1.18.1",
     "ejs": "^3.0.1",
@@ -26,6 +21,7 @@
     "method-override": "^3.0.0",
     "multer": "^1.4.2",
     "mysql": "^2.17.1",
+    "nodemailer": "^6.4.5",
     "passport": "^0.4.1",
     "password-hash": "^1.2.2",
     "request": "^2.88.0"

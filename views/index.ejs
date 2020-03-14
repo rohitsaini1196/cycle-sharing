@@ -18,6 +18,9 @@
 
     <script>
       var cycles  = <%-JSON.stringify(data)%>;
+      var user = <%-JSON.stringify(user)%>;
+      console.log(user);
+
       console.log(cycles);
 
 
@@ -51,10 +54,82 @@
                 cycles[i].to_time
               )}` +
               "</span>   <br />  </p>  " +
-              " <button type='button' class='btn btn-primary text-center'> Book Now  </button> </div> </article></div>"
+              `<button type='button' class='btn btn-primary text-center' id='model-pop-${i}' data-toggle="modal" data-target="#model-pop-gg-${i}"> Book Now  </button> </div> </article></div>`
+          );
+
+          $("#all-model-area").append(
+            `<div class="modal fade" id="model-pop-gg-${i}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you want to book ${cycles[i].cycle_name} of ${
+              cycles[i].from_user_name
+            } from ${timeOfGivenDate(cycles[i].from_time)} - ${dateOfGivenDate(
+              cycles[i].from_time
+            )} to  ${timeOfGivenDate(cycles[i].to_time)} - ${dateOfGivenDate(
+              cycles[i].to_time
+            )}  ? 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <form method="POST" action="/book">
+           <input type="hidden"  name="IdOfOrder" value=${cycles[i].cycle_id}>
+            <input type="hidden"  name="consumerId" value=${user[0].id}>
+        <button type="submit" class="btn btn-primary">Yes, Book it</button>
+        <form>
+      </div>
+    </div>
+  </div>
+</div>`
           );
         });
+
+        // function buttonPopup(n) {
+        //   $.ajax({
+        //     url: "http://localhost:3000/book",
+        //     type: "POST",
+        //     data: JSON.stringify({
+        //       bookedCycleName: cycles[n].cycle_name,
+        //       bookedCycleImage: cycles[n].cycle_image_link,
+        //       from_user: cycles[n].from_user,
+        //       to_user: user[0].user_email
+        //     }), //send this to server
+        //     success: function(returned) {
+        //       console.log(returnet); // here can get the return of route
+        //     },
+        //     error: function() {}
+        //   });
+        // }
       });
+
+      // function buttonPopup(n) {
+      //   var xhr = new XMLHttpRequest();
+      //   var url = "http://localhost:3000/book";
+      //   xhr.open("POST", url, true);
+      //   xhr.setRequestHeader("Content-Type", "application/json");
+      //   xhr.onreadystatechange = function() {
+      //     if (xhr.readyState === 4 && xhr.status === 200) {
+      //       var json = JSON.parse(xhr.responseText);
+      //     }
+      //   };
+      //   var data = JSON.stringify({
+      //     bookedCycleName: cycles[n].cycle_name,
+      //     bookedCycleImage: cycles[n].cycle_image_link,
+      //     from_user: cycles[n].from_user,
+      //     to_user: user[0].user_email
+      //   });
+      //   xhr.send(data);
+      //   //alert("Your Cycle is booked!");
+      //   document.getElementById("pop-hidden-button").click();
+      // }
+
+      function buttonPopup(n) {}
     </script>
     <style>
       a {
@@ -76,10 +151,36 @@
       #login-form {
         display: none;
       }
+      .navbar-nav > li > .dropdown-menu {
+        background-color: #e7e7e7;
+      }
+      .navbar-nav > li > .dropdown-menu a {
+        color: #555555;
+      }
+      .footer {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 0.2 rem;
+
+        text-align: center;
+      }
+      html {
+        height: 100%;
+        box-sizing: border-box;
+      }
+
+      body {
+        position: relative;
+        margin: 0;
+        padding-bottom: 6rem;
+        min-height: 100%;
+      }
     </style>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href="#">Cycool</a>
       <button
         class="navbar-toggler"
@@ -101,35 +202,116 @@
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">About Us</a>
+            <a class="nav-link" href="/orders/cycles">Your Cycles</a>
           </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Orders
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/orders/cycles">Your Cycles</a>
+              <a class="dropdown-item" href="/orders/previous"
+                >Previous Bookings</a
+              >
+
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/orders/live">Live Bookings</a>
+            </div>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="/orders/live">Live Orders</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/orders/previous">Previous Orders</a>
+          </li> -->
         </ul>
         <ul class="navbar-nav  navbar-right">
-          <li class="nav-item">
-            <a class="nav-link" href="/login" tabindex="-1" aria-disabled="true"
+          <!-- <li class="nav-item">
+            <a
+              class="nav-link"
+              href="/addcycle"
+              tabindex="-1"
+              aria-disabled="true"
               ><i
                 class="fa fa-plus-circle text-primary fa-2x"
                 aria-hidden="true"
               ></i>
             </a>
-          </li>
+          </li> -->
           <li class="nav-item">
-            <a class="nav-link" href="/login" tabindex="-1" aria-disabled="true"
-              >Login</a
+            <a
+              class="nav-link"
+              href="/addcycle"
+              tabindex="-1"
+              aria-disabled="true"
+              >Add Cycle</a
             >
           </li>
           <li class="nav-item">
             <a
               class="nav-link"
-              href="/register"
+              href=""
+              id="userdata"
               tabindex="-1"
               aria-disabled="true"
-              >Register</a
+              >Username</a
             >
+          </li>
+          <li class="nav-item">
+            <form
+              class="form-inline my-2 my-lg-0"
+              method="POST"
+              action="/logout"
+            >
+              <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">
+                Logout
+              </button>
+            </form>
           </li>
         </ul>
       </div>
     </nav>
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Order Placed</h4>
+            <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Check your live orders for more info.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default">
+              <a href="./orders/live">Live Booking</a>
+            </button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button
+      type="button"
+      class="btn btn-info btn-lg"
+      data-toggle="modal"
+      data-target="#myModal"
+      id="pop-hidden-button"
+      style="display: none;"
+    >
+      Open Small Modal
+    </button>
 
     <article class="container">
       <article class="row" id="all-cycle-area">
@@ -249,6 +431,11 @@
       <br /><br /><br /><br />
     </article>
 
+    <div id="all-model-area"></div>
+    <div class="footer bg-dark text-secondary">
+      Copyright &copy; 2020 All Rights Reserved by Cycool.
+    </div>
+
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -264,5 +451,10 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
+    <script>
+      var x = document.getElementById("userdata");
+      x.href = "/users/" + user[0].id;
+      x.innerHTML = user[0].name;
+    </script>
   </body>
 </html>

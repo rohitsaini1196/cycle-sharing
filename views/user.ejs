@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%-name%> | Cycool User</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link href="./style.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+
+        var user = {
+            name :" <%-name%>",
+            id: parseInt("<%-id%>"),
+            email:"<%-email%>",
+            address: "<%-address%>",
+            contact: "<%-contact%>",
+            verifed: parseInt("<%-verified%>"),
+            joined: "<%-joined%>"
+        }
+
+        console.log(user);
+        
+    </script>
+    <style>
+      a {
+        transition: 0.25s all;
+      }
+
+      .navbar-nav > li > .dropdown-menu {
+        background-color: #e7e7e7;
+      }
+
+      .navbar-nav > li > .dropdown-menu a {
+        color: #555555;
+      }
+
+      .footer {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 0.2 rem;
+
+        text-align: center;
+      }
+
+      html {
+        height: 100%;
+        box-sizing: border-box;
+      }
+
+      body {
+        position: relative;
+        margin: 0;
+        padding-bottom: 6rem;
+        min-height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Cycool</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/"
+              >Home <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/orders/cycles">Your Cycles</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Orders
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/orders/cycles">Your Cycles</a>
+              <a class="dropdown-item" href="/orders/previous"
+                >Previous Bookings</a
+              >
+
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/orders/live">Live Bookings</a>
+            </div>
+          </li>
+          <!-- <li class="nav-item">
+                    <a class="nav-link" href="/orders/live">Live Orders</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/orders/previous">Previous Orders</a>
+                  </li> -->
+        </ul>
+        <ul class="navbar-nav  navbar-right">
+        
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="/addcycle"
+              tabindex="-1"
+              aria-disabled="true"
+              >Add Cycle</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link  active"
+              href=""
+              id="userdata"
+              tabindex="-1"
+              aria-disabled="true"
+              >Username</a
+            >
+          </li>
+          <li class="nav-item">
+            <form
+              class="form-inline my-2 my-lg-0"
+              method="POST"
+              action="/logout"
+            >
+              <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">
+                Logout
+              </button>
+            </form>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container py-3">
+        <div class="row">
+            <div class="col-md-12">
+    
+    
+    
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <span class="anchor" id="formLogin"></span>
+                        <!-- form card login -->
+                        <div class="card card-outline-secondary">
+                            <div class="card-header">
+                                <!-- <h3 class="mb-0">User Profile</h3> -->
+                            </div>
+                            <div class="card-body">
+                               <div style="width: 150px; height: 150px;" class="mx-auto">
+                                    <img class="card-img-top mx-auto rounded-circle avatar"
+                                        src="/randomimagepasswordisalwayschangingyoucannotdeocdeit/400/<%-id%>" alt="User image" width="150px">
+                               </div>
+                               <div class="mx-auto">
+                                <h3 class="card-title center">Name : <%-name%> </h3><span id="verified-gg">fgh</span>
+                                <p>Email : <%-email%></p>
+                                <p>Address : <%-address%></p>
+                                <p>Contact No.: <%-contact%></p>
+                               </div>
+                                
+                            </div>
+                            <div class="card-footer text-muted">
+                               <strong>Joined</strong> <span id="joined-span">Today</span>
+                            </div>
+                            <!--/card-block-->
+                        </div><!-- /form card login -->
+                    </div>
+                </div>
+                
+    
+    
+    
+    
+    
+    
+            </div>
+            <!--/card-->
+        </div>
+    </div>
+    <!--/row-->
+    </div>
+    <!--/col-->
+
+    <!-- <div class="container">
+      <p><%-name%></p>
+    </div> -->
+    <div class="footer bg-dark text-secondary">
+      Copyright &copy; 2020 All Rights Reserved by Cycool.
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+
+   
+
+    <script>
+      function timerAgogg(time) {
+        var templates = {
+          prefix: "",
+          suffix: " ago",
+          seconds: "less than a minute",
+          minute: "about a minute",
+          minutes: "%d minutes",
+          hour: "about an hour",
+          hours: "about %d hours",
+          day: "a day",
+          days: "%d days",
+          month: "about a month",
+          months: "%d months",
+          year: "about a year",
+          years: "%d years"
+        };
+        var template = function(t, n) {
+          return (
+            templates[t] && templates[t].replace(/%d/i, Math.abs(Math.round(n)))
+          );
+        };
+
+        if (!time) return;
+        time = time.replace(/\.\d+/, ""); // remove milliseconds
+        time = time.replace(/-/, "/").replace(/-/, "/");
+        time = time.replace(/T/, " ").replace(/Z/, " UTC");
+        time = time.replace(/([\+\-]\d\d)\:?(\d\d)/, " $1$2"); // -04:00 -> -0400
+        time = new Date(time * 1000 || time);
+
+        var now = new Date();
+        var seconds = ((now.getTime() - time) * 0.001) >> 0;
+        var minutes = seconds / 60;
+        var hours = minutes / 60;
+        var days = hours / 24;
+        var years = days / 365;
+
+        return (
+          templates.prefix +
+          ((seconds < 45 && template("seconds", seconds)) ||
+            (seconds < 90 && template("minute", 1)) ||
+            (minutes < 45 && template("minutes", minutes)) ||
+            (minutes < 90 && template("hour", 1)) ||
+            (hours < 24 && template("hours", hours)) ||
+            (hours < 42 && template("day", 1)) ||
+            (days < 30 && template("days", days)) ||
+            (days < 45 && template("month", 1)) ||
+            (days < 365 && template("months", days / 30)) ||
+            (years < 1.5 && template("year", 1)) ||
+            template("years", years)) +
+          templates.suffix
+        );
+      }
+      var dategg = "2020-03-11T00:47:47.000Z";
+      console.log(timerAgogg("<%-joined%>"));
+    </script>
+    <script>
+        var x = document.getElementById("userdata");
+        x.href = "/users/" + user.id;
+        x.innerHTML = user.name;
+
+        var joined = document.getElementById('joined-span');
+        joined.innerHTML = timerAgogg(user.joined);
+
+        // var vuv = document.getElementById('varify-user-value');
+        // vuv.value = user.id;
+
+
+        var lifesucks = document.getElementById('verified-gg');
+        
+        if(user.verified){  lifesucks.innerHTML = "Verified User";
+        } else{
+            // lifesucks.innerHTML = `<form action="/verify" method="POST">
+            // <input type ="hidden" name = "uid" value =${ user.id}  id="varify-user-value">
+            //   <button type="submit" class="btn btn-primary text-center">Verify</button>
+            //     </form >`;
+
+            lifesucks.innerHTML = "Not Verified"
+
+        }
+
+
+    </script>
+  </body>
+</html>

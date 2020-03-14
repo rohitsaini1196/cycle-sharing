@@ -4,21 +4,154 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
+    <title>Cycool - Welcome to Cycle Sharing of IISERB</title>
+
+    <!-- bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <style>
+      html {
+        height: 100%;
+        box-sizing: border-box;
+      }
+
+      body {
+        position: relative;
+        margin: 0;
+        padding-bottom: 6rem;
+        min-height: 100%;
+      }
+
+      .footer {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 0.5rem;
+
+        text-align: center;
+      }
+      .form-box {
+        max-width: 500px;
+        margin: auto;
+        padding: 50px;
+        background: #ffffff;
+        border: 10px solid #f2f2f2;
+      }
+    </style>
   </head>
   <body>
-    <h1>Log in</h1>
-    <div class="" id="login-form">
-      <form method="POST" action="/dashboard">
-        <br />
-        Username or E-mail : <input type="email" name="email" /> Password:
-        <input type="password" name="password" /><br /><br />
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+      <a class="navbar-brand" href="/">
+        Cycool
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#collapsibleNavbar"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Privacy Policy</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/register">Register</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    
 
-        <input type="submit" />
-      </form>
+    <!-- form -->
+
+      <div class="container py-3">
+        <div class="row">
+          <div class="col-md-12">
+      
+      
+      
+            <div class="row justify-content-center">
+              <div class="col-md-6">
+                <span class="anchor" id="formLogin"></span>
+                <!-- form card login -->
+                <div class="card card-outline-secondary">
+                  <div class="card-header">
+                    <h3 class="mb-0">Login</h3>
+                  </div>
+                  <div class="card-body">
+                    <form autocomplete="off" class="form" id="formLogin" name="formLogin" role="form" method="POST" action="/">
+                      <div class="form-group">
+                        <label for="uname1">Username</label>
+                        <input class="form-control"  type="email" name="email" required>
+                      </div>
+                      <div class="form-group">
+                        <label>Password</label>
+                        <input  class="form-control"  required="" type="password" name="password">
+                      </div>
+                      <a href="/forget">Forget Password?</a> <br>
+                        <a href="/register"> Register Here</a>
+                      
+                      <button class="btn btn-success btn-lg float-right" type="submit">Login</button>
+                    </form>
+                  </div>
+                  <!--/card-block-->
+                </div><!-- /form card login -->
+              </div>
+            </div>
+      
+      
+      
+      
+      
+      
+          </div>
+          <!--/card-->
+        </div>
+      </div>
+      <!--/row-->
+      </div>
+      <!--/col-->
+
+    <!-- <div class="form-box" id="login-form">
+        <form method="POST" action="/">
+          Username or E-mail : <input type="email" name="email" /> Password:
+          <input type="password" name="password" />
+
+          <input type="submit" />
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input class="form-control" id="name" type="text" name="Name" />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input class="form-control" id="email" type="email" name="Email" />
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea
+              class="form-control"
+              id="message"
+              name="Message"
+            ></textarea>
+          </div>
+          <input class="btn btn-primary" type="submit" value="Submit" />
+        </form>
+      </div> -->
+
+    <div class="footer bg-dark text-secondary">
+      Copyright &copy; 2020 All Rights Reserved by Cycool.
     </div>
-    <a href="/register">Register</a>
-    <br />
-    <a href="/">Home</a>
   </body>
 </html>

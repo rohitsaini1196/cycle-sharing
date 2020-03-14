@@ -17,7 +17,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
       var user = <%-JSON.stringify(user)%>;
-           console.log(user);
+      console.log(user);
+
+       var cycles = <%-JSON.stringify(data)%>;
+        console.log(cycles);
+         function timeOfGivenDate(str) {
+                var localDate = new Date(str);
+                var h = localDate.getHours(), m = localDate.getMinutes();
+                if (h < 10) { h = "0" + h; } if (m < 10) { m = "0" + m; }
+                return h + ":" + m;
+            }
+            function dateOfGivenDate(str) {
+                var localDate = new Date(str);
+                var day = localDate.getDate(), month = localDate.getMonth() + 1, year = localDate.getFullYear();
+                return day + "-" + month + "-" + year;
+            }
     </script>
 
     <style>
@@ -59,6 +73,28 @@
         min-height: 100%;
       }
     </style>
+    <script>
+      $(document).ready(function() {
+        $.each(cycles, function(i, val) {
+          $("#live-orders").append(
+            ` <div class='col-xs-12 col-md-3 coolboy'> <article class='card animated fadeInLeft'>  <img class='card-img-top img-responsive' src='${cycles[i].cycle_image_link}' alt='${cycles[i].cycle_name}' height="200px" style="width: auto;" />   <div class='card-body'> ` +
+              ` <h4 class='card-title' id='cycle-title'>  ${cycles[i].cycle_name} ` +
+              `<span style='font-size: small;'>of <a href='#' class='badge badge-secondary'>${cycles[i].from_user_name}</a></span> </h4><p class='card-text'>  <strong>Pickup point  <i class='fa fa-map-marker' aria-hidden='true' style='color:red;'></i> : </strong> ${cycles[i].pickup_address} <br /> ` +
+              `<strong>From <i class='fa fa-calendar text-primary' aria-hidden='true'></i> :  </strong> ${timeOfGivenDate(
+                cycles[i].from_time
+              )}<span class='badge badge-pill badge-light'>${dateOfGivenDate(
+                cycles[i].from_time
+              )}</span> <br />  <strong>To  <i class='fa fa-calendar-times-o .text-muted' aria-hidden='true'></i>   :  </strong> ${timeOfGivenDate(
+                cycles[i].to_time
+              )} <span class='badge badge-pill badge-light'>${dateOfGivenDate(
+                cycles[i].to_time
+              )}` +
+              "</span>   <br />  </p>  " +
+              ` </div> </article></div>`
+          );
+        });
+      });
+    </script>
   </head>
 
   <body>
@@ -88,7 +124,7 @@
           </li>
           <li class="nav-item dropdown">
             <a
-              class="nav-link dropdown-toggle"
+              class="nav-link dropdown-toggle  active"
               href="#"
               id="navbarDropdown"
               role="button"
@@ -108,29 +144,11 @@
               <a class="dropdown-item" href="/orders/live">Live Bookings</a>
             </div>
           </li>
-          <!-- <li class="nav-item">
-                <a class="nav-link" href="/orders/live">Live Orders</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/orders/previous">Previous Orders</a>
-              </li> -->
         </ul>
         <ul class="navbar-nav  navbar-right">
-          <!-- <li class="nav-item">
-                <a
-                  class="nav-link"
-                  href="/addcycle"
-                  tabindex="-1"
-                  aria-disabled="true"
-                  ><i
-                    class="fa fa-plus-circle text-primary fa-2x"
-                    aria-hidden="true"
-                  ></i>
-                </a>
-              </li> -->
           <li class="nav-item">
             <a
-              class="nav-link active"
+              class="nav-link"
               href="/addcycle"
               tabindex="-1"
               aria-disabled="true"
@@ -162,96 +180,8 @@
       </div>
     </nav>
 
+    <div id="live-orders"></div>
 
-    <div class="container py-3">
-      <div class="row">
-        <div class="col-md-12">
-    
-    
-    
-    
-          <div class="row justify-content-center">
-            <div class="col-md-6">
-              <span class="anchor" id="formRegister"></span>
-    
-              <!-- form card register -->
-              <div class="card card-outline-secondary">
-                <div class="card-header">
-                  <h3 class="mb-0">Add Cycle </h3>
-                </div>
-                <div class="card-body">
-                  <form autocomplete="off" class="form" role="form" method="POST" action="/addcycle" enctype="multipart/form-data">
-                    <div class="form-group">
-                      <label for="inputName">Cycle Name</label>
-                      <input class="form-control" id="inputName" placeholder="Brand Name (ex: Atlas yoga 271)" type="text" name="cycle_name">
-                    </div>
-                    <div class="form-group">
-                      <label for="inputPICKUP3">Pick-Up Location</label>
-                      <input class="form-control" id="inputPICKUP3" placeholder="Where's my Cycle" required="" type="email"
-                        name="pickup_address">
-                    </div>
-                    <div class="form-group">
-                      <label for="inputfromtime3">Cycle is free from</label>
-                      <input autocomplete="new-password" class="form-control" id="inputfromtime3" 
-                        required="" type="datetime-local" name="from_time">
-                      <!-- <small class="form-text text-muted" id="passwordHelpBlock">Your password must be 8-20 characters long,
-                              contain letters and numbers, and must not contain spaces, special characters, or emoji.</small> -->
-                    </div>
-                    <div class="form-group">
-                      <label for="inputtotime3">Cycle is free till</label>
-                      <input class="form-control" id="inputtotime3" 
-                        required="" type="datetime-local" name="to_time">
-                    </div>
-                    <div class="form-group">
-                      <label for="inputImage3">Image of Cycle</label>
-                      <input class="form-control-file" id="inputImage3" placeholder="Image of Cycle" type="file" name="myFile" required>
-                    </div>
-                    <!-- <div class="form-group">
-                            <label for="inputVerify3">Verify</label>
-                            <input class="form-control" id="inputVerify3" placeholder="Password (again)" required=""
-                              type="password">
-                          </div> -->
-                 
-                    <div class="form-group">
-                      <button class="btn btn-success btn-lg float-right" type="submit">Add Cycle</button>
-                    </div>
-                  </form>
-                </div>
-              </div><!-- /form card register -->
-            </div>
-          </div>
-    
-    
-    
-    
-    
-    
-        </div>
-        <!--/card-->
-      </div>
-    </div>
-    <!--/row-->
-    </div>
-    <!--/col-->
-    <!-- <div class="container">
-      <h1>Log in</h1>
-      <div class="" id="add-cycle-form">
-        <form method="POST" action="/addcycle" enctype="multipart/form-data">
-          <br />
-          Cycle Name : <input type="text" name="cycle_name" /> <br />From user
-          Pickup location : <input type="text" name="pickup_address" />
-          <br />from time :
-          <input type="datetime-local" name="from_time" /><br />
-          to time : <input type="datetime-local" name="to_time" /><br />
-          Upload cycle image if you want :
-          <input type="file" name="myFile" /><br />
-
-          <input type="submit" />
-        </form>
-        <br />
-        <a href="/">Home</a>
-      </div>
-    </div> -->
     <div class="footer bg-dark text-secondary">
       Copyright &copy; 2020 All Rights Reserved by Cycool.
     </div>
